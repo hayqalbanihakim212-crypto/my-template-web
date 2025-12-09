@@ -1,6 +1,43 @@
 ## 🚀 Live Demo
 Klik link di bawah untuk mencoba webnya langsung:
-[👉 Lihat Website Langsung](https://hayqalbanihakim212-crypto.github.io/my-template-web/bonus.html,index908.html, index1.html, index45.html, index66.html, index99.html)
+[👉 Lihat Website](https://hayqalbanihakim212-crypto.github.io/my-template-web/bonus.html)
+[👉 Lihat Website](https://hayqalbanihakim212-crypto.github.io/my-template-web/bonus.html)
+
+Pilih halaman yang ingin dilihat:
+* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+
+Pilih halaman yang ingin dilihat:
+* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+## 🚀 Live Demo
+Klik link di bawah untuk mencoba webnya langsung:
+
+[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+
+Pilih halaman yang ingin dilihat:
+* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+## 🚀 Live Demo
+Klik link di bawah untuk mencoba webnya langsung:
+
+[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+
+Pilih halaman yang ingin dilihat:
+* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+## 🚀 Live Demo
+Klik link di bawah untuk mencoba webnya langsung:
+
+[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+
+Pilih halaman yang ingin dilihat:
+* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+## 🚀 Live Demo
+Klik link di bawah untuk mencoba webnya langsung:
+
+[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+
+Pilih halaman yang ingin dilihat:
+* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+index908.html, index1.html, index45.html, index66.html, index99.html)
 Semua template ini gratis. Tapi kalau kamu mau saya bantu ubah warnanya, ganti fotonya, cukup traktir saya Nasi Padang (Rp 20k) di Saweria, nanti saya kerjain, anda dapat menghubungi saya via:
 
 📞 Hubungi Saya (Contact)

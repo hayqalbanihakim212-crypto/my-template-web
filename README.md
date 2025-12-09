@@ -8,7 +8,7 @@ my-template-web
 🤝 Dukungan (Support)
 
 Dengan bantuan  dan dukungan anda akan sangat berarti untuk saya.
-anda dapat mendukung saya dalam bentuk mata uang crypto atau e-wallet, dengan mengklik link di bawah ini.
+anda dapat mendukung saya dalam bentuk mata uang crypto atau e-wallet dengan mengklik link di bawah ini.
 
 1. Saweria (DANA/OVO/GoPay)
 Klik tombol di bawah untuk traktir kopi:

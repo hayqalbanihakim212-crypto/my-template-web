@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .input-wrapper {
+            position: relative;
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .thecat {
+            position: absolute;
+            right: -18px;
+            top: -15px;
+            width: 50px;
+            height: auto;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .cat-relaxing {
+            opacity: 1;
+        }
+
+        .cat-spacingOut {
+            opacity: 0;
+        }
+
+        .input-wrapper:focus-within .cat-relaxing {
+            opacity: 0;
+        }
+
+        .input-wrapper:focus-within .cat-spacingOut {
+            opacity: 1;
+        }
+
+        .form-control {
+            padding-right: 70px;
+        }
+    </style>
+    <form class="d-flex" role="search">
+        <div class="input-wrapper">
+            <input id="search1" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <img id="cat1" class="thecat cat-relaxing" src="1.3-removebg-preview.png" alt="">
+            <img id="cat2" class="thecat cat-spacingOut" src="1.1-removebg-preview.png" alt="">
+        </div>
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+    </form>
+    <script>
+        const inputPencarian = document.getElementById('search1');
+        const elemenKucing = document.getElementById('cat1');
+        const elemenKucing2 = document.getElementById('cat2');
+
+
+        const kucingSantai = "1.3-removebg-preview.png";
+        const kucingBengong = "1.1-removebg-preview.png";
+
+        inputPencarian.addEventListener('focus', function () {
+            elemenKucing.src = "1.1-removebg-preview.png";
+        });
+        inputPencarian.addEventListener('blur', function () {
+            elemenKucing.src = "1.3-removebg-preview.png";
+        });
+    </script>
+</body>
+
+</html>

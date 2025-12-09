@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>login komunitas</head>
+<style>
+  #root {
+    background-color: black;
+    color: aqua;
+    font-size: 2em;
+    text-align: center;
+    height: 100vh;
+  }
+</style>
+
+<body>
+  <!-- js -->
+  <div id="root">
+    <input type='text' placeholder="username" id="usernameInput" />
+    <input type='password' placeholder="password" id="passwordInput" />
+    <div class="forgotPassword" id="forgotPassword"><a href="#">Forgot Password</a>
+    </div>
+    <div class="signuIn" id="signIn">Don't have an account?<a href="#">Sign In</a>
+    </div>
+    <button onclick="onLogin()" id="button">login</button>
+    <button onclick="onLogout()" id="buttonOut">logout</button>
+    <br />
+    <h1 id="admin">admin</h1>
+    <h1 id="biasa">biasa</h1>
+
+  </div>
+
+  <script type="application/javascript">
+
+    let usernameInput = document.getElementById('usernameInput');
+    let passwordInput = document.getElementById('passwordInput');
+    let forgotPassword = document.getElementById('forgotPassword');
+    let signIn = document.getElementById('signIn');
+    let button = document.getElementById('button');
+    let butttonOut = document.getElementById('buttonOut');
+    let admin = document.getElementById('admin');
+    let biasa = document.getElementById('biasa');
+
+    admin.style.display = 'none';
+    biasa.style.display = 'none';
+    buttonOut.style.display = 'none'
+
+    function onLogin() {
+      localStorage.setItem("username", "usernameInput.value");
+      buttonOut.style.display = 'block'
+      if (usernameInput.value == "admin" && passwordInput.value == "admin123") {
+        localStorage.setItem("role", "admin");
+        usernameInput.style.display = "none"
+        passwordInput.style.display = "none"
+        forgotPassword.style.display = "none";
+        signIn.style.display = "none";
+        button.style.display = "none"
+        biasa.style.display = "none";
+        admin.style.display = "block";
+
+      } else {
+        localStorage.setItem("role", "biasa");
+        usernameInput.style.display = "none"
+        forgotPassword.style.display = "none";
+        signIn.style.display = "none";
+        passwordInput.style.display = "none"
+        button.style.display = "none"
+        biasa.style.display = "block";
+        admin.style.display = "none";
+      }
+
+    }
+    if (localStorage.getItem('username')) {
+      usernameInput.style.display = "none"
+      passwordInput.style.display = "none"
+      forgotPassword.style.display = "none";
+      signIn.style.display = "none";
+      button.style.display = "none"
+      buttonOut.style.display = "block"
+      if (localStorage.getItem('role') == "admin") {
+        biasa.style.display = "none";
+        admin.style.display = "block";
+      } else {
+        admin.style.display = "none";
+        biasa.style.display = "block";
+      }
+
+    }
+    function onLogout() {
+      localStorage.clear();
+      location.reload();
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <div id="root">
+    <input type='text' placeholder="Username" id="usernameInput" />
+    <input type='password' placeholder="Password" id="passwordInput" />
+    <div class="forgotPassword" id="forgotPassword"><a href="index908.html">Forgot Password</a>
+    </div>
+    <div class="signuIn" id="signIn">Don't have an account?<a href="index99.html">Sign In</a>
+    </div>
+    <button
+      class="text-white bg-[#0f1419] hover:bg-[#0f1419]/90 focus:ring-4 focus:outline-none 
+    focus:ring-[#0f1419]/50 box-border border border-transparent font-medium leading-5 
+    rounded-base text-sm px-4 py-2 text-center inline-flex items-center dark:hover:bg-[#183] dark:focus:ring-[#628648]/55"
+      fill="currentColor" viewBox="0 0 24 24" onclick="onLogin()" id="button">Login</button>
+    <button class="text-white bg-[#0f1419] hover:bg-[#0f1419]/90 focus:ring-4 focus:outline-none 
+    focus:ring-[#0f1419]/50 box-border border border-transparent font-medium leading-5 rounded-base 
+    text-sm px-4 py-2 text-center inline-flex items-center dark:hover:bg-[#901] dark:focus:ring-[#982929]/55"
+      fill="currentColor" viewBox="0 0 24 24" onclick="onLogout()" id="buttonOut">Logout</button>
+    <br />
+    <h1 id="admin">admin</h1>
+    <h1 id="biasa">biasa</h1>
+
+  </div>
+
+  <script type="application/javascript">
+
+    let usernameInput = document.getElementById('usernameInput');
+    let passwordInput = document.getElementById('passwordInput');
+    let forgotPassword = document.getElementById('forgotPassword');
+    let signIn = document.getElementById('signIn');
+    let button = document.getElementById('button');
+    let butttonOut = document.getElementById('buttonOut');
+
+    let admin = document.getElementById('admin');
+    let biasa = document.getElementById('biasa');
+
+    admin.style.display = 'none';
+    biasa.style.display = 'none';
+    buttonOut.style.display = 'none';
+
+    function onLogin() {
+      localStorage.setItem("username", "usernameInput.value");
+      buttonOut.style.display = 'block'
+      if (usernameInput.value == "admin" && passwordInput.value == "admin123") {
+        localStorage.setItem("role", "admin");
+        usernameInput.style.display = "none"
+        singIn.style.display = "none"
+        button.style.display = "none"
+        forgotPassword.style.display = "none"
+        signIn.style.display = "none"
+        biasa.style.display = "none";
+        admin.style.display = "block";
+
+      } else {
+        localStorage.setItem("role", "biasa");
+        usernameInput.style.display = "none"
+        passwordInput.style.display = "none"
+        button.style.display = "none"
+        forgotPassword.style.display = "none"
+        signIn.style.display = "none"
+        biasa.style.display = "block";
+        admin.style.display = "none";
+      }
+
+    }
+    if (localStorage.getItem('username')) {
+      usernameInput.style.display = "none"
+      passwordInput.style.display = "none"
+      button.style.display = "none"
+      buttonOut.style.display = "block"
+      forgotPassword.style.display = "none";
+      signIn.style.display = "none";
+      if (localStorage.getItem('role') == "admin") {
+        biasa.style.display = "none";
+        admin.style.display = "block";
+      } else {
+        admin.style.display = "none";
+        biasa.style.display = "block";
+      }
+
+    }
+    function onLogout() {
+      localStorage.removeItem("username");
+      location.reload("role");
+    }
+  </script> -->
+</body>
+
+</html>

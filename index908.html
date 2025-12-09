@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #111;
+            color: #0f0;
+            padding: 20px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #222;
+            border: 1px solid #0f0;
+            color: #fff;
+        }
+
+        button {
+            background: #0f0;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+        <h1>code</h1>
+        <div class="converst">
+            <label>Input</label>
+            <input type="text" id="input" placeholder="paste and write is here">
+            <button onclick="CreateCode()">Create</button>
+            <br></br>
+        </div>
+        <div>
+            <label>Code</label>
+            <textarea id="resultInput" rows="4" readonly></textarea>
+        </div>
+    </div>
+    <script>
+        const codeSecret = {
+            //lowerAlpabet
+            'a': '#', 'b': ';', 'c': '`',
+            'e': '3', 'f': '&', 'g': '-',
+            'h': '+', 'i': '8', 'j': '(',
+            'k': ')', 'l': '/', 'm': '?',
+            'n': '!', 'o': '9', 'p': '0',
+            'q': '1', 'r': '$', 's': '4',
+            't': '5', 'u': '7', 'v': ':',
+            'w': '2', 'x': '"', 'y': '6',
+            'z': '*',
+            // Symbol
+            '#': 'a', ';': 'b', '`': 'c',
+            '&': 'f', '-': 'g', '+': 'h',
+            '(': 'j', ')': 'k', '/': 'l',
+            '?': 'm', '!': 'n', '$': 'r',
+            ':': 'v', '"': 'x', '*': 'z',
+            //number
+            '3': 'e', '8': 'i', '9': 'o',
+            '0': 'p', '1': 'q', '4': 's',
+            '5': 't', '7': '2', 'u': 'w', '6': 'y',
+            // UpperAlpabet
+            'A': '<', 'B': '{', 'C': ']',
+            'D': '=', 'E': ']', 'F': '.',
+            'G': ',', 'H': '}', 'I': '~',
+            'K': ':', 'L': ';', 'M': '>',
+            'N': '%', 'O': '^', 'P': '_',
+            'Q': "'", 'R': '<', 'S': '|',
+        };
+        const randomPool = "0123456789!@#$%^&*()_+=-{}[]';:/?.,<>~`"
+        function CreateCode() {
+            let inputElement = document.getElementById("input");
+            let input = inputElement.value;
+            let result = "";
+            for (let i = 0; i < input.length; i++) {
+                let char = input[i];
+                if (char >= 'T' && char <= 'Z') {
+                    let randomIndex = (Math.floor(Math.random() * randomPool.length));
+                    let randomChar = randomPool.charAt(randomIndex);
+                    result += randomChar;
+                }
+                else if (codeSecret[char] !== undefined) {
+                    result += codeSecret[char];
+                } else {
+                    result += char;
+                }
+            } document.getElementById("resultInput").value = result;
+        }
+    </script>
+
+</body>
+
+</html>

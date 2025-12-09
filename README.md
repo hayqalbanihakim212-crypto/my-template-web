@@ -1,4 +1,5 @@
 my-template-web
+Semua template ini gratis. Tapi kalau kamu mau saya bantu ubah warnanya, ganti fotonya, cukup traktir saya Nasi Padang (Rp 20k) di Saweria, nanti saya kerjain.
 
 ![GitHub license](https://img.shields.io/github/license/hayqalbanihakim212-crypto/my-template-web?style=flat-square)
 ![GitHub stars](https://img.shields.io/github/stars/hayqalbanihakim212-crypto/my-template-web?style=flat-square)

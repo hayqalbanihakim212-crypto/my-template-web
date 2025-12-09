@@ -1,6 +1,7 @@
 Semua template ini gratis. Tapi kalau kamu mau saya bantu ubah warnanya, ganti fotonya, cukup traktir saya Nasi Padang (Rp 20k) di Saweria, nanti saya kerjain, anda dapat menghubungi saya di
 
 📞 Hubungi Saya (Contact)
+
 [![Email](https://img.shields.io/badge/Email-Hubungi_Via_Email-red?style=for-the-badge&logo=gmail)](mailto:EMAIL_hayqalbanihakim212@gmail.com)
 
 [![Telegram](https://img.shields.io/badge/Telegram-Chat_Saya-blue?style=for-the-badge&logo=telegram)](https://t.me/@qalopi90)

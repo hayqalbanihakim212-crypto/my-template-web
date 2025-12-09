@@ -1,4 +1,4 @@
-Semua template ini gratis. Tapi kalau kamu mau saya bantu ubah warnanya, ganti fotonya, cukup traktir saya Nasi Padang (Rp 20k) di Saweria, nanti saya kerjain, anda dapat menghubungi saya di
+Semua template ini gratis. Tapi kalau kamu mau saya bantu ubah warnanya, ganti fotonya, cukup traktir saya Nasi Padang (Rp 20k) di Saweria, nanti saya kerjain, anda dapat menghubungi saya via:
 
 📞 Hubungi Saya (Contact)
 

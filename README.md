@@ -1,43 +1,27 @@
 ## 🚀 Live Demo
 Klik link di bawah untuk mencoba webnya langsung:
-[👉 Lihat Website](https://hayqalbanihakim212-crypto.github.io/my-template-web/bonus.html)
-[👉 Lihat Website](https://hayqalbanihakim212-crypto.github.io/my-template-web/bonus.html)
+## perhatian beberapa website tidak akan bekerja jika hanya mencopy html namun tidak menyertakan javascript(js) dan css
 
-Pilih halaman yang ingin dilihat:
-* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
-[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+[📄 Lihat halaman index908.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/index908.html)
 
-Pilih halaman yang ingin dilihat:
-* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
-## 🚀 Live Demo
-Klik link di bawah untuk mencoba webnya langsung:
+[📄 Lihat halaman video.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/video.html)
 
-[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+[📄 Lihat halaman form.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/form.html)
 
-Pilih halaman yang ingin dilihat:
-* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
-## 🚀 Live Demo
-Klik link di bawah untuk mencoba webnya langsung:
+[📄 Lihat halaman index.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/index.html)
 
-[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+[📄 Lihat halaman index1.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/index1.html)
 
-Pilih halaman yang ingin dilihat:
-* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
-## 🚀 Live Demo
-Klik link di bawah untuk mencoba webnya langsung:
+[📄 Lihat halaman index45.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/index45.html)
 
-[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+[📄 Lihat halaman index66.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/index66.html)
 
-Pilih halaman yang ingin dilihat:
-* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
-## 🚀 Live Demo
-Klik link di bawah untuk mencoba webnya langsung:
+[📄 Lihat halaman index99.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/index99.html)
 
-[👉 Lihat Website Utama](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
+[📄 Lihat halaman web.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/web.html)
 
-Pilih halaman yang ingin dilihat:
-* [📄 Halaman About Me](https://hayqalbanihakim212-crypto.github.io/my-template-web/About%20me.html)
-index908.html, index1.html, index45.html, index66.html, index99.html)
+[📄 Lihat halaman bonus.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/bonus.html)
+
 Semua template ini gratis. Tapi kalau kamu mau saya bantu ubah warnanya, ganti fotonya, cukup traktir saya Nasi Padang (Rp 20k) di Saweria, nanti saya kerjain, anda dapat menghubungi saya via:
 
 📞 Hubungi Saya (Contact)

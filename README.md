@@ -1,7 +1,3 @@
-## 🚀 Live Demo
-Klik link di bawah untuk mencoba webnya langsung:
-[👉 Lihat Website Langsung](https://hayqalbanihakim212-crypto.github.io/my-template-web/index908.html)
-
 Semua template ini gratis. Tapi kalau kamu mau saya bantu ubah warnanya, ganti fotonya, cukup traktir saya Nasi Padang (Rp 20k) di Saweria, nanti saya kerjain, anda dapat menghubungi saya via:
 
 📞 Hubungi Saya (Contact)

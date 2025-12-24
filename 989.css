@@ -1,0 +1,167 @@
+*, html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    scroll-behavior: smooth;
+}
+header {
+    background: rgb(55, 1, 71);
+    color: #900;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.logo{
+    margin-right: auto;
+    display: flex;
+    gap: 6px
+}
+.logo-img{
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+
+}
+.logo-title{
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+.logo:hover{
+    color: crimson;
+    transform: rotate(2deg);
+}
+.btn-oct{
+    margin-right: 10px;
+    border: none;
+    font-size: 20px;
+    padding: 6px 12px;
+    background: #FF6A3D;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+nav ul{
+    display: flex;
+    padding: 20px;
+}
+li {
+    list-style-type: none;
+    padding: 10px;
+
+}
+li a{
+    transition: .3s ease-in-out;
+    display: block;
+}
+li a:hover {
+    color:forestgreen;
+    transform: rotate(2deg);
+}
+a{
+    color:black;
+    text-decoration: none;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 0;
+}
+.intro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+.title{
+    font-size: 28px;
+    font-weight: bold;
+}
+.desription {
+    font-size: 10px;
+    font-weight: bolder;
+}
+.img-foto{
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    padding: 10px;
+}
+.paradox{
+    background-image: url(walpaper1.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.bio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #0c0807;
+    color: gainsboro;
+    padding: 40px;   
+}
+.nt-10{
+    margin-top: 20px;
+}
+.card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap:10px
+}
+.card-items{
+    text-align: center;
+    width: 25%;
+    background: #f7f7;
+    color: black;
+    padding: 24px;
+    box-shadow: 2px 2px 2px 2px #0c0807;
+}
+.icon{
+    width: 75px;
+    height: 75px;
+    margin: 10px;
+    padding: 4px;
+}
+.card-title{
+    font-size: 14px;
+    font-weight: bolder;
+}
+.card-desription{
+    font-size: 14px;
+    margin-top: 4px;
+}
+footer{
+    padding: 20px;
+    text-align: center;
+    background: #900;
+    color: black;
+}
+@media screen and (max-width: 500px) {
+    .card{
+flex-direction: column;
+gap: 0;
+    }
+    card-items{
+        width: 100%;
+    }
+    .container{
+        width: 100%;
+        padding: 40px 0 0 0;
+    }
+    .intro{
+        margin-top: 20px;
+    }
+    .img-foto{
+padding: 0;
+    }
+}

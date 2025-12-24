@@ -1,8 +1,11 @@
 ## 🚀 Live Demo
 Klik link di bawah untuk mencoba webnya langsung:
 ## perhatian beberapa website tidak akan bekerja jika hanya mencopy html namun tidak menyertakan javascript(js) dan css
+[📄 Lihat halaman apiexternal.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/apiexternal.html)
 
-[📄 Lihat halaman index908.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/index908.html)
+[📄 Lihat halaman halamankansulogin.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/halamankansulogin.html)
+
+[📄 Lihat halaman 989.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/989.html)
 
 [📄 Lihat halaman video.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/video.html)
 
@@ -23,6 +26,8 @@ Klik link di bawah untuk mencoba webnya langsung:
 [📄 Lihat halaman iiiii.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/iiiii.html)
 
 [📄 Lihat halaman bonus.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/bonus.html)
+
+[📄 Lihat halaman index908.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/index908.html)
 
 Semua template ini gratis. Tapi kalau kamu mau saya bantu ubah warnanya, ganti fotonya, cukup traktir saya Nasi Padang (Rp 20k) di Saweria, nanti saya kerjain, anda dapat menghubungi saya via:
 

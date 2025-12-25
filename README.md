@@ -1,6 +1,8 @@
 ## 🚀 Live Demo
 Klik link di bawah untuk mencoba webnya langsung:
 ## perhatian beberapa website tidak akan bekerja jika hanya mencopy html namun tidak menyertakan javascript(js) dan css
+[📄 Lihat halaman apiexternal.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/webJualan.html)
+
 [📄 Lihat halaman apiexternal.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/apiexternal.html)
 
 [📄 Lihat halaman halamankansulogin.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/halamankansulogin.html)

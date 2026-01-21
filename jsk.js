@@ -1,3 +1,5 @@
+const API_BASE_URL = 'http://localhost:3000'; // Ganti URL ini jika server sudah online (misal: https://nama-app.onrender.com)
+
 function hubungiDeveloper() {
     const noHp = "6282181858276"; // Ganti dengan nomor developer jika berbeda
     const pesan = `Halo Developer, saya ingin bertanya seputar website ini.`;
@@ -230,7 +232,7 @@ async function submitRegistration(e) {
 
     // 1. Simpan data ke Localhost (Backend Database)
     try {
-        const response = await fetch('http://localhost:3000/api/register', {
+        const response = await fetch(`${API_BASE_URL}/api/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, wa })
@@ -251,7 +253,7 @@ async function submitRegistration(e) {
 
 // Fungsi Update Otomatis Jumlah Anggota (Polling dari Server)
 function updateMemberCount() {
-    fetch('http://localhost:3000/api/member-count')
+    fetch(`${API_BASE_URL}/api/member-count`)
         .then(res => res.json())
         .then(data => {
             if (data.count !== undefined) {
@@ -267,7 +269,7 @@ function updateMemberCount() {
 // --- Fungsi Load Modul Pembelajaran (Termasuk Premium) ---
 async function loadModules() {
     try {
-        const response = await fetch('http://localhost:3000/api/modules');
+        const response = await fetch(`${API_BASE_URL}/api/modules`);
         const modules = await response.json();
         const container = document.getElementById('modulesContainer');
         if (!container) return;
@@ -281,7 +283,7 @@ async function loadModules() {
                 btnAction = `<button onclick="downloadPremium('${m.file}')" class="btn btn-warning w-100 fw-bold"><i class="fa-solid fa-lock me-2"></i> Premium Download</button>`;
             } else {
                 // Tombol untuk modul gratis
-                btnAction = `<a href="http://localhost:3000/downloads/${m.file}" class="btn btn-primary w-100" download><i class="fa-solid fa-download me-2"></i> Download Gratis</a>`;
+                btnAction = `<a href="${API_BASE_URL}/downloads/${m.file}" class="btn btn-primary w-100" download><i class="fa-solid fa-download me-2"></i> Download Gratis</a>`;
             }
 
             const card = `
@@ -304,14 +306,14 @@ function downloadPremium(filename) {
     const password = prompt("Masukkan Password Premium untuk mengunduh file ini:");
     if (password) {
         // Redirect ke endpoint download premium dengan password
-        window.location.href = `http://localhost:3000/api/download-premium?filename=${encodeURIComponent(filename)}&password=${encodeURIComponent(password)}`;
+        window.location.href = `${API_BASE_URL}/api/download-premium?filename=${encodeURIComponent(filename)}&password=${encodeURIComponent(password)}`;
     }
 }
 
 // --- Fungsi Load Update Komunitas ---
 async function loadUpdates() {
     try {
-        const response = await fetch('http://localhost:3000/api/updates');
+        const response = await fetch(`${API_BASE_URL}/api/updates`);
         const updates = await response.json();
         const container = document.getElementById('updatesContainer');
         if (!container) return;
@@ -332,7 +334,7 @@ async function loadUpdates() {
             const card = `
                 <div class="col">
                     <div class="card h-100 shadow-sm border-0">
-                        <img src="http://localhost:3000/downloads/${update.image}" class="card-img-top" alt="${update.title}" style="height: 200px; object-fit: cover;">
+                        <img src="${API_BASE_URL}/downloads/${update.image}" class="card-img-top" alt="${update.title}" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">${update.title}</h5>
                             <p class="card-text text-muted small"><i class="fa-regular fa-calendar me-1"></i> ${date}</p>
@@ -351,7 +353,7 @@ async function loadUpdates() {
 // --- Fungsi Load Riwayat Trade ---
 async function loadTrades() {
     try {
-        const response = await fetch('http://localhost:3000/api/trades');
+        const response = await fetch(`${API_BASE_URL}/api/trades`);
         const trades = await response.json();
         const container = document.getElementById('tradesContainer');
         if (!container) return;
@@ -373,7 +375,7 @@ async function loadTrades() {
             const card = `
                 <div class="col">
                     <div class="card h-100 shadow-sm border-0" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); color: white;">
-                        <img src="http://localhost:3000/downloads/${trade.image}" class="card-img-top" alt="${trade.pair}" style="height: 200px; object-fit: cover;">
+                        <img src="${API_BASE_URL}/downloads/${trade.image}" class="card-img-top" alt="${trade.pair}" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <h5 class="card-title fw-bold mb-0">${trade.pair}</h5>

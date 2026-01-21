@@ -348,10 +348,55 @@ async function loadUpdates() {
     }
 }
 
+// --- Fungsi Load Riwayat Trade ---
+async function loadTrades() {
+    try {
+        const response = await fetch('http://localhost:3000/api/trades');
+        const trades = await response.json();
+        const container = document.getElementById('tradesContainer');
+        if (!container) return;
+        
+        container.innerHTML = '';
+
+        if (trades.length === 0) {
+            container.innerHTML = '<div class="col-12 text-center text-white"><p>Belum ada riwayat trade.</p></div>';
+            return;
+        }
+
+        trades.forEach(trade => {
+            const date = new Date(trade.date).toLocaleDateString('id-ID', {
+                day: 'numeric', month: 'short', year: 'numeric'
+            });
+            const isWin = trade.result.toLowerCase().includes('win') || trade.result.toLowerCase().includes('profit') || trade.result.includes('+');
+            const badgeClass = isWin ? 'bg-success' : 'bg-danger';
+
+            const card = `
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); color: white;">
+                        <img src="http://localhost:3000/downloads/${trade.image}" class="card-img-top" alt="${trade.pair}" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title fw-bold mb-0">${trade.pair}</h5>
+                                <span class="badge ${badgeClass}">${trade.result}</span>
+                            </div>
+                            <p class="card-text small text-white-50"><i class="fa-regular fa-calendar me-1"></i> ${date}</p>
+                            <p class="card-text">${trade.description}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += card;
+        });
+    } catch (error) {
+        console.error('Gagal memuat trades:', error);
+    }
+}
+
 // Jalankan fungsi saat halaman selesai dimuat
 document.addEventListener('DOMContentLoaded', () => {
     updateMemberCount();
     loadUpdates();
+    loadTrades();
     loadModules();
     setInterval(updateMemberCount, 10000);
 });

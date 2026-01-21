@@ -1,4 +1,7 @@
-const API_BASE_URL = 'http://localhost:3000'; // Ganti URL ini jika server sudah online (misal: https://nama-app.onrender.com)
+// Logika otomatis: Jika buka di localhost, pakai localhost:3000. Jika online, pakai URL Backend.
+// PENTING: Ganti 'https://ganti-dengan-url-backend-anda.onrender.com' dengan URL asli dari Render/Railway nanti.
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE_URL = isLocal ? 'http://localhost:3000' : 'https://ganti-dengan-url-backend-anda.onrender.com';
 
 function hubungiDeveloper() {
     const noHp = "6282181858276"; // Ganti dengan nomor developer jika berbeda

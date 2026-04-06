@@ -1,7 +1,7 @@
 ## 🚀 Live Demo
 Klik link di bawah untuk mencoba webnya langsung:
 ## perhatian beberapa website tidak akan bekerja jika hanya mencopy html namun tidak menyertakan javascript(js) dan css
-[📄 Lihat halaman admin.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/admin.html)
+[📄 Lihat halaman gi.html
 
 [📄 Lihat halaman IB.html](https://hayqalbanihakim212-crypto.github.io/my-template-web/0.html)
 

